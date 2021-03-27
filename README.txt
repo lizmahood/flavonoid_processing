@@ -1,9 +1,9 @@
 A series of scripts used for flavonoid identification in Bennett et al, 2021
 
 USAGE FOR:
-./in_house_flavonoid_extraction/extract_flavonoids.py
+in_house_flavonoid_extraction/extract_flavonoids.py
 
-python ./in_house_flavonoid_extraction/extract_flavonoids.py ./in_house_flavonoid_extraction/masses.list.combinations ./example_inputs/example_compounds.mgf 3000
+python in_house_flavonoid_extraction/extract_flavonoids.py in_house_flavonoid_extraction/masses.list.combinations example_inputs/example_compounds.mgf 3000
 
 #####This script extracts peaks with fragments matching those in masses.list.combinations from the input mgf. Outputs new mgf into the same directory as the input.
 #####First argument: masses.list.combinations
@@ -13,9 +13,9 @@ python ./in_house_flavonoid_extraction/extract_flavonoids.py ./in_house_flavonoi
 
 
 USAGE FOR:
-./running_canopus/1make_and_launch_compounds_individually.py
+running_canopus/1make_and_launch_compounds_individually.py
 
-python ./running_canopus/1make_and_launch_compounds_individually.py ./example_inputs/example_compounds.mgf.fil.thresh3000.mgf <siriusdir> <mgfdir> ./example_inputs/example_alignment.tsv <instype>
+python running_canopus/1make_and_launch_compounds_individually.py example_inputs/example_compounds.mgf.fil.thresh3000.mgf <siriusdir> <mgfdir> example_inputs/example_alignment.tsv <instype>
 
 #####This script launches the CANOPUS software (part of the SIRIUS4 suite) on each of your metabolites individually. The individual mgfs are put in mgfdir, and the output is in siriusdir
 #####First argument: Input mgf to classify. Note that the example input here is NOT included in this repo. It is only created after the above script has been run.
@@ -27,9 +27,9 @@ python ./running_canopus/1make_and_launch_compounds_individually.py ./example_in
 
 
 USAGE FOR: 
-./running_canopus/2concatenate_individual_sirius_outputs.py
+running_canopus/2concatenate_individual_sirius_outputs.py
 
-python ./running_canopus/2concatenate_individual_sirius_outputs.py <full path to siriusdir> <output name>
+python running_canopus/2concatenate_individual_sirius_outputs.py <full path to siriusdir> <output name>
 
 #####This script combines Sirius/CANOPUS outputs made for individual compounds into one file. The output (two tsv files) gets put into the directory of sirius output files
 #####First argument: FULL directory FROM ROOT to sirius output files, must end in /
@@ -38,15 +38,15 @@ python ./running_canopus/2concatenate_individual_sirius_outputs.py <full path to
 
 
 USAGE FOR:
-./running_canopus/3get_confidence_scores.py 
+running_canopus/3get_confidence_scores.py 
 
-python ./running_canopus/3get_confidence_scores.py <siriusdir> <compound class> <false positive class> <mode> <canopus summary file> <formula summary file> <output name>
+python running_canopus/3get_confidence_scores.py <siriusdir> <compound class> <false positive class> <mode> <canopus summary file> <formula summary file> <output name>
 
-#####This script is quite versatile. Usage scenario 1: you are analyzing data of a certain type of compound, and want to see how well CANOPUS did in predicting
+#####This script is versatile. Usage scenario 1: you are analyzing data of a certain type of compound, and want to see how well CANOPUS did in predicting
 the correct class of your molecules. Usage scenario 2: You don't know the correct compound class of your molecules, but want to see how "sure" CANOPUS is about
 your molecules belonging to their predicted class. In each scenario, a probability score plot and tsv are output.
 #####First argument: Path to where your SIRIUS outputs were put
-#####Second argument: The compound class you think your molecules are OR Unknown. If your class has spaces, substitue them with _
+#####Second argument: The compound class you think your molecules are OR Unknown. In our paper, we used class Flavonoid. If your class has spaces, substitue them with _
 #####Third argument: The class you want to check False Positive instances of OR none
 #####Fourth argument: The ionization mode your samples were collected in. pos OR neg
 #####Fifth argument: Path to canopus summary file (output of 2concatenate_individual_sirius_outputs.py)
@@ -55,9 +55,17 @@ your molecules belonging to their predicted class. In each scenario, a probabili
 
 
 
+USAGE FOR: 
+make_flavonoid_mgf.py 
 
+python make_flavonoid_mgf.py example_inputs/example_compounds.mgf.fil.thresh3000.mgf example_inputs/example_anthocyanins.mgf example_inputs/example_compounds.mgf <confidence score tsv> <output>
 
-
-
+#####This script combines all anthocyanins, in-house predicted flavonoids, and CANOPUS predicted flavonoids (passing the confidence score threshold) into one mgf.
+This mgf was used by the authors to create the molecular network as seen in our paper.
+#####First argument: The mgf of in-house predicted flavonoids, produced by extract_flavonoids.py
+#####Second argument: Input mgf of known anthocyanins
+#####Third argument: Input mgf of all compounds (this mgf must have been used to run CANOPUS, and create the confidence score file output by 3get_confidence_scores.py)
+#####Fourth argument: Confidence score file, output of 3get_confidence_scores.py. This has to have been made from the mgf used in the third argument.
+#####Fifth argument: Desired path and prefix of output file names
 
 
