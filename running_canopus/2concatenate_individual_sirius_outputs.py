@@ -2,8 +2,8 @@ import sys, glob, os
 
 def concat_sirius(sirdir):
     '''
-    @param: sirdir is a string, path to parent sirius directory
-    Returns: 2 lists of lines in sirius output files (first is
+    :param sirdir: is a string, path to parent sirius directory
+    :returns: 2 lists of lines in sirius output files (first is
     formula file, second is canopus file)
     '''
     compounds_dirs = os.listdir(sirdir)
@@ -28,8 +28,8 @@ def concat_sirius(sirdir):
 
 def remove_duplicate_lines(fillst):
     '''
-    @param: fillst is a list of strings, first element is "header"
-    returns: list with all but the first instance of "header" removed
+    :param fillst: is a list of strings, first element is "header"
+    :returns: list with all but the first instance of "header" removed
     '''
     header = fillst[0]
     filtered = list(filter(lambda lin: lin != header, fillst))
@@ -37,8 +37,8 @@ def remove_duplicate_lines(fillst):
 
 def main(sirdir, onam):
     '''
-    @param: sirdir is a string, path to parent sirius directory
-    @param: onam is a string, path to output dir and name
+    :param sirdir: is a string, path to parent sirius directory
+    :param onam: is a string, path to output dir and name
     '''
     formulas, canopus = concat_sirius(sirdir)
     formgood = remove_duplicate_lines(formulas)

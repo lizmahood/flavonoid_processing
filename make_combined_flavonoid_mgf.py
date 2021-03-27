@@ -160,7 +160,7 @@ def main(flavmgf, anthomgf, allmgf, alinfil, ofil):
 if __name__ == '__main__':
 
     if len(sys.argv) != 6:
-        sys.exit('ARGS: 1) Gaurav\'s flavonoid mgf 2) Anthocyanin mgf '\
+        sys.exit('ARGS: 1) flavonoid mgf (made from extract_flavonoids.py) 2) Anthocyanin mgf '\
             '3) Full mgf 4) conf_score file for flavonoids 5) output directory')
 
     main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4],sys.argv[5])

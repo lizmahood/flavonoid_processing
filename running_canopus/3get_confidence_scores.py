@@ -3,17 +3,6 @@ import pandas as pd
 from joypy import joyplot 
 import matplotlib.pyplot as plt
 
-## Output with unknown classes: 4-col file of probability
-## of the associated class for each instance. Ridge plot
-## of probabilities per class
-
-## Output with known class: 2-col file of TP/FN and probabilities
-## for each instance, ridge plot of TP/FN probabilities
-
-## Output with additional false positive class (can't be the same
-## as the actual class): Additional file (one col) of FP probabilites
-## and a density plot of these
-
 def parse_canopus_outputs(c_summary, f_summary):
     '''
     :param c_summary: canopus_summary for all compounds

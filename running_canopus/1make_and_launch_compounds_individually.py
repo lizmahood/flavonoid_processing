@@ -1,7 +1,3 @@
-## new script for 2make_and_launch_compounds_individually.py
-## Takes in mgf and various directories and alignment file
-## very similar to old version
-
 import sys, os
 
 def launch_sirius(mgf, odir, mstype):
